@@ -1,4 +1,9 @@
-import { useState } from 'react'
+// routes
+import Router from "./routes";
+// theme
+import ThemeProvider from './theme';
+// components
+import ThemeSettings from './components/settings';
 
 function App() {
 
@@ -9,7 +14,6 @@ function App() {
           Install & Setup Vite + React + Typescript + Tailwind CSS 3
         </h1>
       </div>
-      );
     </>
   )
 }
