@@ -1,8 +1,8 @@
-import { alpha } from "@mui/material/styles";
+import { alpha } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-function createGradient(color1: string, color2: string): string {
+function createGradient(color1:string, color2:string) {
   return `linear-gradient(to bottom, ${color1}, ${color2})`;
 }
 
@@ -21,7 +21,7 @@ const SECONDARY = {
   dark: "#25243D",
   darker: "#12121E",
 };
-const ACTION = {
+const INFO = {
   lighter: "#FFD6CA",
   light: "#FEAC94",
   main: "#FE754D",
@@ -73,7 +73,7 @@ const GREY = {
 
 const GRADIENTS = {
   primary: createGradient(PRIMARY.light, PRIMARY.main),
-  info: createGradient(ACTION.light, ACTION.main),
+  info: createGradient(INFO.light, INFO.main),
   success: createGradient(SUCCESS.light, SUCCESS.main),
   warning: createGradient(WARNING.light, WARNING.main),
   error: createGradient(ERROR.light, ERROR.main),
@@ -91,7 +91,7 @@ const COMMON = {
   common: { black: "#000", white: "#fff" },
   primary: { ...PRIMARY, contrastText: "#fff" },
   secondary: { ...SECONDARY, contrastText: "#fff" },
-  info: { ...ACTION, contrastText: "#fff" },
+  info: { ...INFO, contrastText: "#fff" },
   success: { ...SUCCESS, contrastText: GREY[800] },
   warning: { ...WARNING, contrastText: GREY[800] },
   error: { ...ERROR, contrastText: "#fff" },
@@ -99,7 +99,7 @@ const COMMON = {
   gradients: GRADIENTS,
   chart: CHART_COLORS,
   divider: GREY[500_24],
-  action: {
+  INFO: {
     hover: GREY[500_8],
     selected: GREY[500_16],
     disabled: GREY[500_80],
@@ -116,14 +116,14 @@ const palette = {
     mode: "light",
     text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
     background: { paper: "#fff", default: "#fff", neutral: GREY[200] },
-    action: { active: GREY[600], ...COMMON.action },
+    INFO: { active: GREY[600], ...COMMON.INFO },
   },
   dark: {
     ...COMMON,
     mode: "dark",
     text: { primary: "#fff", secondary: GREY[500], disabled: GREY[600] },
     background: { paper: GREY[800], default: GREY[900], neutral: GREY[500_16] },
-    action: { active: GREY[500], ...COMMON.action },
+    INFO: { active: GREY[500], ...COMMON.INFO },
   },
 };
 
