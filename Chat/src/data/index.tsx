@@ -50,6 +50,18 @@ const Nav_Setting = [
   },
 ];
 
+const ChannelList = [
+  {
+    id: 0,
+    img: faker.image.avatar(),
+    name: faker.commerce.department(),
+    msg: faker.music.songName(),
+    time: "9:36",
+    unread: 0,
+    pinned: true,
+  }
+]
+
 const ChatList = [
   {
     id: 0,

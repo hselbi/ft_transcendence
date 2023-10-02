@@ -1,11 +1,21 @@
+import { useTheme } from "@emotion/react";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
+import { Box, Paper, Stack, Tab, Tabs, styled } from "@mui/material";
+import { Users } from "phosphor-react";
 import React from "react";
+import ChatTabs from "./ChatTabs";
+// import Paper from "../../theme/overrides/Paper";
 
 const GeneralApp = () => {
 
+  const theme = useTheme();
+
   return (
-    <>
-      App==hellow
-    </>
+    <Stack direction={"row"} sx={{ width: "100%" }}>
+      <Stack direction={"column"} margin={"50px"}>
+      <ChatTabs />
+      </Stack>
+    </Stack>
   );
 };
 
