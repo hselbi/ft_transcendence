@@ -20,12 +20,13 @@ export default function Router() {
   return useRoutes([
     {
       path: "/",
-      element: <DashboardLayout />,
+      element: <> <DashboardLayout /></>,
       children: [
         { element: <Navigate to={DEFAULT_PATH} replace />, index: true },
         { path: "chat", element: <GeneralChat /> },
         { path: "colors", element: <Colors /> },
         { path: "typograph", element: <Typograph /> },
+        // { path: "", element: <Typograph /> },
         
         { path: "404", element: <Page404 /> },
         { path: "*", element: <Navigate to="/404" replace /> },
@@ -42,6 +43,15 @@ const GeneralChat = Loadable(
 const Colors = Loadable(
   lazy(() => import("../pages/Colors")),
 );
+
+const RightBar = Loadable(
+  lazy(() => import("../components/leila/RightSideBar/RightBar")),
+);
+
+const SearchBar = Loadable(
+  lazy(() => import("../components/leila/SearchBar/SearchBar")),
+);
+
 
 const Typograph = Loadable(
   lazy(() => import("../pages/Typograph")),

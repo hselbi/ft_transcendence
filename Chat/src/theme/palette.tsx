@@ -1,10 +1,26 @@
-import { alpha } from '@mui/material/styles';
+import { alpha } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
-function createGradient(color1:string, color2:string) {
+function createGradient(color1: string, color2: string) {
   return `linear-gradient(to bottom, ${color1}, ${color2})`;
 }
+
+function newGradient(
+  deg: string,
+  color1: string,
+  start: string,
+  color2: string,
+  end: string,
+  color3?: string,
+  mid?: string,
+)
+{
+  // if (color3 && mid)
+  //   return `linear-gradient(${deg}deg, ${color1} ${start}%, ${color2} ${end}%, ${color3} ${mid}%)`;
+  // else
+    return `linear-gradient(${deg}deg, ${color1} ${start}%, ${color2} ${end}%)`;
+};
 
 // SETUP COLORS
 const PRIMARY = {
@@ -110,6 +126,10 @@ const COMMON = {
   },
 };
 
+const HAFID = {
+  primary: newGradient('225', '#16132B', '0', '#3D3C65', '100'),
+};
+
 const palette = {
   light: {
     ...COMMON,
@@ -122,7 +142,7 @@ const palette = {
     ...COMMON,
     mode: "dark",
     text: { primary: "#fff", secondary: GREY[500], disabled: GREY[600] },
-    background: { paper: GREY[800], default: GREY[900], neutral: GREY[500_16] },
+    background: { paper: HAFID.primary, default: GREY[900], neutral: GREY[500_16] },
     INFO: { active: GREY[500], ...COMMON.INFO },
   },
 };

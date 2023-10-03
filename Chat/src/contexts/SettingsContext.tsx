@@ -8,11 +8,11 @@ import getColorPresets, {
 
 
 interface Settings {
-    themeMode: string;
-    themeDirection: string;
-    themeContrast: string;
-    themeLayout: string;
-    themeColorPresets: string;
+    themeMode: any;
+    themeDirection: any;
+    themeContrast: any;
+    themeLayout: any;
+    themeColorPresets: any;
     themeStretch: boolean;
     onToggleMode: () => void;
     onChangeMode: (event: React.ChangeEvent<HTMLInputElement>) => void;
