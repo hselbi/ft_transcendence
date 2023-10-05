@@ -45,7 +45,7 @@ const Friends = () => {
               alignContent={"center"}
               spacing={3}
               color="#709CE6"
-              margin={"auto"}
+              margin={"auto "}
               display={"block"}
             >
               {/* <ArchiveBox size={35} /> */}
