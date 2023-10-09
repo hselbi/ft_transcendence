@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Box, Stack } from "@mui/material";
 import { MagnifyingGlass } from "phosphor-react";
 import { ChatList } from "../../data";
@@ -9,8 +9,26 @@ import {
   SearchIconWrapper,
   StyledInputBase,
 } from "../../components/Search";
+import { useSocket } from "../../contexts/socket.context";
+import EVENTS from "../../config/events";
 
 const All = () => {
+
+  const {socket, roomId, rooms} = useSocket();
+  const newRoomRef = useRef(null);
+
+  function handleCreateRoom() {
+    //get the room name (neme of room)
+    const roomName = newRoomRef.current.value || "";
+
+    if (!String(roomName).trim()) return;
+
+    // emit room created event (create room)
+    socket.emit(EVENTS.CLIENT.CREATE_ROOM, { roomName });
+
+    // set room name input to empty string
+    newRoomRef.current.value = "";
+  }
   return (
     <Box
       sx={{

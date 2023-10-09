@@ -30,7 +30,7 @@ const SharedMsgs = () => {
 
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (event, newValue:any) => {
     setValue(newValue);
   };
   return (

@@ -32,7 +32,17 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const ChatElements = (id:any) => {
+interface IdType  {
+  id: number;
+  name: string;
+  img: string;
+  time: string;
+  msg: string;
+  unread: number;
+  online: boolean;
+}
+
+const ChatElements = (id:IdType) => {
   return (
     <Box
       sx={{

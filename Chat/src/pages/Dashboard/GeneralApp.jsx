@@ -180,9 +180,10 @@ const GeneralApp = () => {
         //       style: { borderRadius: "15px", },
         //     }}
       >
+      heeloooo
         <Converstation />
       </Box>
-      {contactInfo.open &&
+      {/* {contactInfo.open &&
         (() => {
           switch (contactInfo.type) {
             case "CONTACT":
@@ -194,7 +195,7 @@ const GeneralApp = () => {
             default:
               return null;
           }
-        })()}
+        })()} */}
     </Stack>
   );
 };

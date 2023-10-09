@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   Box,
   Badge,
@@ -15,6 +15,8 @@ import { ArchiveBox, MagnetStraight, MagnifyingGlass } from "phosphor-react";
 import { faker } from "@faker-js/faker";
 import { ChatList } from "../../data";
 import { SimpleBarStyle } from "../../components/Scrollbar";
+import { useSocket } from "../../contexts/socket.context";
+import EVENTS from "../../config/events";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -143,6 +145,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Chats = () => {
+  const {socket, roomId, rooms} = useSocket();
+  const newRoomRef = useRef(null);
+
+  function handleCreateRoom() {
+    //get the room name (neme of room)
+    const roomName = newRoomRef.current.value || "";
+
+    if (!String(roomName).trim()) return;
+
+    // emit room created event (create room)
+    socket.emit(EVENTS.CLIENT.CREATE_ROOM, { roomName });
+
+    // set room name input to empty string
+    newRoomRef.current.value = "";
+  }
   return (
     <Box
       sx={{
@@ -192,7 +209,7 @@ const Chats = () => {
                 },
               }}
             >
-              Archive
+              slops
             </Button>
           </Stack>
           <Divider sx={{paddingTop:"2px", background:"#684C83a2"}} />

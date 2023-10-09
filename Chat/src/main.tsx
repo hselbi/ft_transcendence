@@ -5,7 +5,7 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from "react-helmet-async";
 import reportWebVitals from "./reportWebVitals";
-
+import SocketsProvider from './contexts/socket.context.tsx';
 // contexts
 import SettingsProvider from "./contexts/SettingsContext";
 
@@ -15,9 +15,11 @@ root.render(
   <React.StrictMode>
   <HelmetProvider>
     <SettingsProvider>
+      <SocketsProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
+      </SocketsProvider>
     </SettingsProvider>
   </HelmetProvider>
 </React.StrictMode>

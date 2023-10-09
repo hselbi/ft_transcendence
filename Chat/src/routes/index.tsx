@@ -8,6 +8,7 @@ import DashboardLayout from "../layouts/dashboard";
 import { DEFAULT_PATH } from "../config";
 import LoadingScreen from "../components/LoadingScreen";
 
+
 const Loadable = (Component:any) => (props:any) => {
   return (
     <Suspense fallback={<LoadingScreen />}>
@@ -23,6 +24,7 @@ export default function Router() {
       element: <> <DashboardLayout /></>,
       children: [
         { element: <Navigate to={DEFAULT_PATH} replace />, index: true },
+        { path: "start", element: <Start /> },
         { path: "chat", element: <GeneralChat /> },
         { path: "colors", element: <Colors /> },
         { path: "typograph", element: <Typograph /> },
@@ -44,14 +46,9 @@ const Colors = Loadable(
   lazy(() => import("../pages/Colors")),
 );
 
-const RightBar = Loadable(
-  lazy(() => import("../components/leila/RightSideBar/RightBar")),
+const Start = Loadable(
+  lazy(() => import("../pages/Dashboard/Start")),
 );
-
-const SearchBar = Loadable(
-  lazy(() => import("../components/leila/SearchBar/SearchBar")),
-);
-
 
 const Typograph = Loadable(
   lazy(() => import("../pages/Typograph")),

@@ -1,6 +1,15 @@
-import { Box, Button, ButtonProps, Divider, Stack } from "@mui/material";
-import { styled } from '@mui/material/styles';
-import { ArchiveBox, MagnifyingGlass } from "phosphor-react";
+import {
+  Box,
+  Button,
+  ButtonProps,
+  Divider,
+  IconButton,
+  InputBase,
+  Paper,
+  Stack,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { ArchiveBox, ChatText, MagnifyingGlass } from "phosphor-react";
 import { ChatList } from "../../data";
 import { SimpleBarStyle } from "../../components/Scrollbar";
 import ChatElements from "../../components/Converstation/ChatElements";
@@ -10,15 +19,34 @@ import {
   StyledInputBase,
 } from "../../components/Search";
 
+import { useSocket } from "../../contexts/socket.context";
+import EVENTS from "../../config/events";
+import { useRef } from "react";
+
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   color: "#C7BBD1",
   backgroundColor: "#443263",
-  '&:hover': {
+  "&:hover": {
     backgroundColor: "darkpurple",
   },
 }));
 
 const Privates = () => {
+  const { socket, roomId, rooms } = useSocket();
+  const newRoomRef = useRef(null);
+
+  function handleCreateRoom() {
+    //get the room name (neme of room)
+    const roomName = newRoomRef.current.value || "";
+
+    if (!String(roomName).trim()) return;
+
+    // emit room created event (create room)
+    socket.emit(EVENTS.CLIENT.CREATE_ROOM, { roomName });
+
+    // set room name input to empty string
+    newRoomRef.current.value = "";
+  }
   return (
     <Box
       sx={{
@@ -49,12 +77,7 @@ const Privates = () => {
             margin={"auto"}
             display={"block"}
           >
-            {/* <ArchiveBox size={35} /> */}
             <ColorButton
-              //   PaperProps={{
-              //     style: { margin: "0 15px 20px" },
-              //   }}
-              // margin="0 12px 0"
               startIcon={<ArchiveBox size={26} />}
               sx={{
                 // margin: " 0 20px",
@@ -74,6 +97,30 @@ const Privates = () => {
             </ColorButton>
           </Stack>
           <Divider sx={{ paddingTop: "2px", background: "#684C83a2" }} />
+          <Paper
+            component="form"
+            sx={{
+              p: "2px 4px",
+              display: "flex",
+              alignItems: "center",
+              width: 400,
+            }}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Create a new Room"
+              inputProps={{ "aria-label": "create a new room" }}
+              inputRef={newRoomRef}
+            />
+            <IconButton
+              color="primary"
+              sx={{ p: "10px" }}
+              aria-label="directions"
+              onClick={handleCreateRoom}
+            >
+              <ChatText size={32} />
+            </IconButton>
+          </Paper>
         </Stack>
 
         <Stack
@@ -82,9 +129,26 @@ const Privates = () => {
         >
           <SimpleBarStyle timeout={500} clickOnTrack={false}>
             <Stack>
-              {ChatList.filter((el) => !el.pinned).map((el) => {
-                return <ChatElements {...el} />;
+              {/* every converstation == */}
+              {Object.keys(rooms).map((key) => {
+                return (
+                  <ChatElements
+                    key={key}
+                    name={rooms[key].name}
+                    img={rooms[key].img}
+                    msg={"the last msg"}
+                    time={"10:45 PM"}
+                    unread={2}
+                    online={true}
+                    roomId={key}
+                    active={roomId === key}
+                    // onClick={() => handleJoinRoom(key)}
+                  />
+                );
               })}
+              {/* {ChatList.filter((el) => !el.pinned).map((el) => {
+                return <ChatElements {...el} />;
+              })} */}
             </Stack>
           </SimpleBarStyle>
         </Stack>
